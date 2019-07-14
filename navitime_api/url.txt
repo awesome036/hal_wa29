@@ -1,0 +1,5 @@
+https://api-challenge.navitime.biz/v1s/{SID}/address?coord=35.667156,139.715057&datum=wgs84
+
+https://api-challenge.navitime.biz/v1s/{SID}/route?start-time=2019-07-01T10:00&start=35.680939,139.765254&goal=34.701680,135.496646&car=only&datum=wgs84
+
+https://api-challenge.navitime.biz/v1s/{SID}/spot/list?word=渋谷&datum=wgs84

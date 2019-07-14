@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>jQuey</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+	<form id="myForm" method="post">
+		<table>
+			<tr>
+				<th>
+					<label for="forName">名前</label>
+					<span class="ind">必須</span>
+				</th>
+
+				<td>
+					<input type="text" name="forName">
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					<label for="forFurigana">ふりがな</label>
+					<span class="ind">必須</span>
+				</th>
+
+				<td>
+					<input type="text" name="forFurigana">
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					<label for="forTel">電話番号</label>
+					<span class="ind">必須</span>
+				</th>
+
+				<td>
+					<input type="tel" name="forTel">
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					<label for="forEmail">メールアドレス</label>
+					<span class="ind">必須</span>
+				</th>
+
+				<td>
+					<input type="email" name="forEmail">
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					<label for="forContact">お問い合わせ内容</label>
+					<span class="ind">必須</span>
+				</th>
+
+				<td>
+					<textarea name="forContact" cols="30" rows="10"></textarea>
+				</td>
+			</tr>
+		</table>
+		<p><input type="submit" value="送信内容を確認する"></p>
+	</form>
+
+	<script src="../jquery-3.4.0.min.js"></script>
+	<script src="main.js"></script>
+</body>
+
+</html>

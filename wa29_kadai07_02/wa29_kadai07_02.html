@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>kadai07</title>
+	<style>
+		#map {
+			/* <body>内に記載しているID名 */
+			width: 800px;
+			/* 幅 */
+			height: 450px;
+			/* 高さ */
+			background-color: black;
+			/* 背景色 */
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<h1>ルート検索</h1>
+
+		<input v-model="startSpot" type="text" name="start" placeholder="出発地点">
+		<input v-model="goalSpot" type="text" name="goal" placeholder="到着地点">
+		<button @click="searchRoot" id="searchButton">検索</button>
+
+		<div id="map"></div>
+	</div>
+
+	<script src="https://api-challenge.navitime.biz/v1s/nwH2xtRsmjGj/mapscript?version=3.4&host=localhost"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		let app = new Vue({
+			el: '#app',
+			data() {
+				return {
+					startSpot: '',
+					goalSpot: '',
+					startCoord: {
+						'lon': 0,
+						'lat': 0
+					},
+					goalCoord: {
+						'lon': 0,
+						'lat': 0
+					},
+					promise: Promise,
+					url: '',
+					baseUrl: 'https://api-challenge.navitime.biz/v1s/nwH2xtRsmjGj'
+				}
+			},
+			methods: {
+				window: onload = () => {
+					// ※scriptタグ読み込み後に実行するためmounted内では実行しない
+					center = new navitime.geo.LatLng('35.667395', '139.714896');
+					map = new navitime.geo.Map('map', center, 15);
+				},
+				searchRoot() {
+					if (app.startSpot != '' && app.goalSpot != '') {
+						// 非同期の処理を全て待ってからルート検索を行う
+						this.promise = Promise.all([
+							this.searchSpot(app.startSpot, this.startCoord),
+							this.searchSpot(app.goalSpot, this.goalCoord)
+						]);
+						this.promise.then(() => {
+							this.searchRoute();
+						});
+					}
+				},
+				searchSpot(word, coord) {
+					this.url = this.baseUrl + '/spot/list?word=' + word + '&datum=wgs84';
+					return new Promise((resolve, reject) => {
+						axios
+							.get(this.url)
+							.then(response => {
+								resolve(this.connectSuccessSpot(response, coord));
+							})
+							.catch(error => {
+								reject(this.connectFailure(error));
+							});
+					});
+				},
+				connectSuccessSpot(response, coord) {
+					coord.lat = response.data.items[0].coord.lat;
+					coord.lon = response.data.items[0].coord.lon;
+				},
+				searchRoute() {
+					this.url = this.baseUrl + '/route/shape'
+						+ '?start=' + this.startCoord.lat + ',' + this.startCoord.lon
+						+ '&goal=' + this.goalCoord.lat + ',' + this.goalCoord.lon
+						+ '&add=transport_shape&shape-color=railway_line&datum=wgs84';
+
+					axios
+						.get(this.url)
+						.then(response => {
+							this.connectSuccessRouteShape(response);
+						})
+						.catch(error => {
+							this.connectFailure(error);
+						});
+				},
+				connectSuccessRouteShape(response) {
+					renderer = new navitime.geo.route.Renderer(response.data, {
+						map: map,
+						unit: 'degree',
+						allRoute: true,     // すべてのルートを表示するか
+						arrow: true,     // ルート線上に進行方向の矢印を表示するか
+						originalColor: true     // 路線形状に指定された元々の色を利用するか
+					});
+					renderer.draw();
+				},
+				connectFailure(error) {
+					alert(error);
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>

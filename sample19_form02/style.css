@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+th,
+td {
+	border: solid 1px #ddd;
+	text-align: left;
+}
+
+th .ind {
+	color: #f00;
+}
+
+.errorMsg {
+	display: block;
+	color: #f00;
+}
+
+.errorInput {
+	background: #fcf0f2;
+}

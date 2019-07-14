@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>wa29_kadai04_02</title>
+	<style>
+		.shake {
+			display: block;
+			animation: hurueru .1s infinite;
+		}
+
+		@keyframes hurueru {
+			0% {
+				transform: translate(0px, 0px) rotateZ(0deg)
+			}
+
+			25% {
+				transform: translate(2px, 2px) rotateZ(1deg)
+			}
+
+			50% {
+				transform: translate(0px, 2px) rotateZ(0deg)
+			}
+
+			75% {
+				transform: translate(2px, 0px) rotateZ(-1deg)
+			}
+
+			100% {
+				transform: translate(0px, 0px) rotateZ(0deg)
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<label for="size">文字サイズ：</label>
+	<input type="text" id="size" placeholder="例 10px">
+	<button id="btn1">設定</button>
+	<br>
+
+	<label for="color">文字色：</label>
+	<input type="color" id="color" value="#ffffff">
+	<br>
+
+	<button id="btn2">増やす</button>
+	<p id="keyword">掘っても</p>
+	<button id="btn3">戻す</button>
+	<hr>
+
+	<button id="btn4">拡大</button>
+	<button id="btn5">縮小</button>
+	<button id="btn6">震える</button>
+
+	<script src="../jquery-3.4.0.min.js"></script>
+	<script src="main.js"></script>
+</body>
+
+</html>

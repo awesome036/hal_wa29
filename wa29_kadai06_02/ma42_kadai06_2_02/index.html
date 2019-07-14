@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>kadai06_2</title>
+	<style>
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+		}
+
+		#photoBox {
+			width: 500px;
+			margin: 20px auto;
+		}
+
+		#photolist {
+			position: relative;
+		}
+
+		#photolist li {
+			position: absolute;
+			display: none;
+			list-style-type: none;
+		}
+
+		#photolist li img {
+			width: 100%;
+		}
+
+		#tnlist {
+			position: relative;
+			top: 520px;
+			width: 500px;
+		}
+
+		#tnlist ul {
+			width: 500px;
+			margin: 0 auto;
+		}
+
+		#tnlist li {
+			float: left;
+			width: 80px;
+			padding: 0 10px;
+			list-style-type: none;
+		}
+
+		#tnlist li a {
+			cursor: pointer;
+		}
+
+		#tnlist li a img {
+			box-sizing: border-box;
+			width: 100%;
+		}
+
+		.open {
+			border: solid 2px orange;
+		}
+
+		.close {
+			border: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="photoBox">
+		<ul id="photolist">
+			<li><img src="../images/07.jpg"></li>
+			<li><img src="../images/08.jpg"></li>
+			<li><img src="../images/11.jpg"></li>
+			<li><img src="../images/26.jpg"></li>
+			<li><img src="../images/hibino.jpg"></li>
+		</ul>
+		<div id="tnlist">
+			<ul>
+				<li><a><img src="../images/07.jpg"></a></li>
+				<li><a><img src="../images/08.jpg"></a></li>
+				<li><a><img src="../images/11.jpg"></a></li>
+				<li><a><img src="../images/26.jpg"></a></li>
+				<li><a><img src="../images/hibino.jpg"></a></li>
+			</ul>
+		</div>
+	</div>
+
+
+	<script src="../js/jquery-3.4.0.min.js"></script>
+	<script src="../js/jquery.easing.1.3.js"></script>
+	<script src="main.js"></script>
+</body>
+
+</html>
