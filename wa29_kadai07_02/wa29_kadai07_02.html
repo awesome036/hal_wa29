@@ -25,6 +25,11 @@
 
 		<input v-model="startSpot" type="text" name="start" placeholder="出発地点">
 		<input v-model="goalSpot" type="text" name="goal" placeholder="到着地点">
+		<select v-model="transportation" name="transportation">
+			<option value="walk">徒歩</option>
+			<option value="car">自動車</option>
+			<option value="other">公共交通</option>
+		</select>
 		<button @click="searchRoot" id="searchButton">検索</button>
 
 		<div id="map"></div>
@@ -40,6 +45,8 @@
 				return {
 					startSpot: '',
 					goalSpot: '',
+					transportation: 'walk',
+					optTransportation: '',
 					startCoord: {
 						'lon': 0,
 						'lat': 0
@@ -89,11 +96,25 @@
 					coord.lon = response.data.items[0].coord.lon;
 				},
 				searchRoute() {
+					switch (app.transportation) {
+						case 'walk':
+							this.optTransportation = '&walk=only';
+							break;
+						case 'car':
+							this.optTransportation = '&car=only';
+							break;
+						case 'other':
+							this.optTransportation = '';
+							break;
+						default:
+							this.optTransportation = '';
+					}
 					this.url = this.baseUrl + '/route/shape'
 						+ '?start=' + this.startCoord.lat + ',' + this.startCoord.lon
 						+ '&goal=' + this.goalCoord.lat + ',' + this.goalCoord.lon
-						+ '&add=transport_shape&shape-color=railway_line&datum=wgs84';
-
+						+ '&add=transport_shape&shape-color=railway_line&datum=wgs84'
+						+ this.optTransportation;
+					console.log(this.url);
 					axios
 						.get(this.url)
 						.then(response => {
