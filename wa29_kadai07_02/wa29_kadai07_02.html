@@ -109,12 +109,13 @@
 						default:
 							this.optTransportation = '';
 					}
+
 					this.url = this.baseUrl + '/route/shape'
 						+ '?start=' + this.startCoord.lat + ',' + this.startCoord.lon
 						+ '&goal=' + this.goalCoord.lat + ',' + this.goalCoord.lon
 						+ '&add=transport_shape&shape-color=railway_line&datum=wgs84'
 						+ this.optTransportation;
-					console.log(this.url);
+
 					axios
 						.get(this.url)
 						.then(response => {
