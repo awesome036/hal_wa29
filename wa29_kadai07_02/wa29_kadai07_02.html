@@ -16,6 +16,10 @@
 			background-color: black;
 			/* 背景色 */
 		}
+
+		.inputLine {
+			margin-bottom: 10px;
+		}
 	</style>
 </head>
 
@@ -23,14 +27,28 @@
 	<div id="app">
 		<h1>経路検索</h1>
 
-		<input v-model="startSpot" type="text" name="start" placeholder="出発地点">
-		<input v-model="goalSpot" type="text" name="goal" placeholder="到着地点">
-		<select v-model="transportation" name="transportation">
-			<option value="walk">徒歩</option>
-			<option value="car">自動車</option>
-			<option value="other">公共交通</option>
-		</select>
-		<button @click="searchRoot" id="searchButton">検索</button>
+		<div class="inputLine">
+			<label for="start">出発地：</label>
+			<input v-model="startSpot" type="text" name="start">
+		</div>
+
+		<div class="inputLine">
+			<label for="goal">目的地：</label>
+			<input v-model="goalSpot" type="text" name="goal">
+		</div>
+
+		<div class="inputLine">
+			<label for="transportation">交通手段：</label>
+			<select v-model="transportation" name="transportation">
+				<option value="walk">徒歩</option>
+				<option value="car">自動車</option>
+				<option value="other">公共交通</option>
+			</select>
+		</div>
+
+		<div class="inputLine">
+			<button @click="searchRoot" id="searchButton">検索</button>
+		</div>
 
 		<div id="map"></div>
 	</div>
