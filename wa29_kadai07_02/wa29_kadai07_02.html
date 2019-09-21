@@ -41,6 +41,7 @@
 			<label for="transportation">交通手段：</label>
 			<select v-model="transportation" name="transportation">
 				<option value="walk">徒歩</option>
+				<option value="bicycle">自転車</option>
 				<option value="car">自動車</option>
 				<option value="other">公共交通</option>
 			</select>
@@ -121,6 +122,8 @@
 						case 'car':
 							this.optTransportation = '&car=only';
 							break;
+						case 'bicycle':
+							this.optTransportation = 'bicycle=only';
 						case 'other':
 							this.optTransportation = '';
 							break;
